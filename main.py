@@ -34,3 +34,12 @@ medical_records = [
         'last_visit_id': 'V2304',
     }
 ]
+
+def find_invalid_records(
+    patient_id, age, gender, diagnosis, medications, last_visit_id
+):
+    constraints = {
+        'patient_id': isinstance(patient_id, str) and re.fullmatch('p\d+', patient_id, re.IGNORECASE),
+        'age' : isinstance(age, int)
+    }
+    return constraints
