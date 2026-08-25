@@ -54,3 +54,14 @@ def validate(data):
     key_set = set(
         ['patient_id', 'age', 'gender', 'diagnosis', 'medications', 'last_visit_id']
     )
+
+    for index, dictionary in enumerate(data):
+        if not isinstance(dictionary, dict):
+            print(f'Invalid format: expected a dictionary at position {index}.')
+            is_invalid = True
+
+        if set(dictionary.keys()) != key_set:
+            print(
+                f'Invalid format: {dictionary} at position {index} has missing and/or invalid keys.'
+            )
+            is_invalid = True
