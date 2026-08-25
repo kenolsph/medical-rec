@@ -28,3 +28,9 @@ medical_records = [
     {
         'patient_id': 'p1004',
         'age': 56,
+        'gender': 'Male',
+        'diagnosis': 'Chronic Back Pain',
+        'medications': ['Ibuprofen', 'Physical Therapy'],
+        'last_visit_id': 'V2304',
+    }
+]
