@@ -65,3 +65,11 @@ def validate(data):
                 f'Invalid format: {dictionary} at position {index} has missing and/or invalid keys.'
             )
             is_invalid = True
+    
+        if is_invalid:
+        return False
+    print('Valid format.')
+    return True
+
+validate(medical_records)
+print(find_invalid_records(**medical_records[0]))
