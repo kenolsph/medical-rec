@@ -42,7 +42,8 @@ class User:
 
     def read_email(self, index):
         self.inbox.read_email(index)
-    def delete_email(self,index):
+
+    def delete_email(self, index):
         self.inbox.delete_email(index)
 
 class Inbox:
@@ -77,12 +78,15 @@ class Inbox:
         actual_index = index - 1
         if actual_index < 0 or actual_index >= len(self.emails):
             print('Invalid email number.\n')
-
-            
             return
         del self.emails[actual_index]
-
         print('Email deleted.\n')
+
 def main():
     tory = User('Tory')
     ramy = User('Ramy')
+    
+    tory.send_email(ramy, 'Hello', 'Hi Ramy, just saying hello!')
+    ramy.send_email(tory, 'Re: Hello', 'Hi Tory, hope you are fine.')
+if __name__ == '__main__':
+    main()
