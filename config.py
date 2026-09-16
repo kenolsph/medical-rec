@@ -6,6 +6,7 @@ class Email:
         self.receiver = receiver
         self.subject = subject
         self.body = body
+        self.timestamp = datetime.datetime.now()
         self.read = False
 
     def mark_as_read(self):
@@ -17,13 +18,14 @@ class Email:
         print(f'From: {self.sender.name}')
         print(f'To: {self.receiver.name}')
         print(f'Subject: {self.subject}')
+        print(f"Received: {self.timestamp.strftime('%Y-%m-%d %H:%M')}")
         print(f'Body: {self.body}')
         print('------------\n')
 
     def __str__(self):
         status = 'Read' if self.read else 'Unread'
-        return f"[{status}] From: {self.sender.name} | Subject: {self.subject}"
-        
+        return f"[{status}] From: {self.sender.name} | Subject: {self.subject} | Time: {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -32,7 +34,8 @@ class User:
     def send_email(self, receiver, subject, body):
         email = Email(sender=self, receiver=receiver, subject=subject, body=body)
         receiver.inbox.receive_email(email)
-
+        print(f'Email sent from {self.name} to {receiver.name}!\n')
+        
 class Inbox:
     def __init__(self):
         self.emails = []
@@ -68,6 +71,3 @@ class Inbox:
             return
         del self.emails[actual_index]
         print('Email deleted.\n')
-
-current_time = datetime.datetime.now()
-print(current_time.strftime("%H:%M:%S"))
