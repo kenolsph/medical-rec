@@ -7,12 +7,8 @@ class Employee:
     }
 
     def __init__(self, name, level):
-        if not isinstance(level, str):
-            raise TypeError("'level' attribute must be of type 'str'.")
-        if level not in Employee._base_salaries:
-            raise ValueError(f"Invalid value '{level}' for 'level' attribute.")
         self.name = name
-        self._level = level
+        self.level = level
         self._salary = Employee._base_salaries[level]
 
     def __str__(self):
@@ -36,6 +32,20 @@ class Employee:
     def level(self):
         return self._level
 
+    @level.setter
+    def level(self, new_level):
+        if not isinstance(new_level, str):
+            raise TypeError("'level' must be a string.")
+        if new_level not in Employee._base_salaries:
+            raise ValueError(f"Invalid value '{new_level}' for 'level' attribute.")
+        if hasattr(self, '_level') and new_level == self.level:
+            raise ValueError(f"'{self.level}' is already the selected level.")
+        if hasattr(self, '_level') and Employee._base_salaries[new_level] < Employee._base_salaries[self.level]:
+            raise ValueError("Cannot change to lower level.")
+        print(f"'{self.name}' promoted to '{new_level}'.")
+        self._salary = Employee._base_salaries[new_level]
+        self._level = new_level
+
     @property
     def salary(self):
         return self._salary
@@ -44,3 +54,4 @@ charlie_brown = Employee('Charlie Brown', 'trainee')
 print(charlie_brown)
 print(f'Base salary: ${charlie_brown.salary}')
 
+charlie_brown.level = 'junior'
