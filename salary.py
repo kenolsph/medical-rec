@@ -52,7 +52,8 @@ class Employee:
 
     @salary.setter
     def salary(self, new_salary):
-        
+        if not isinstance (new_salary, (int,float)):
+            raise TypeError("'salary' must be a number.")
         self._salary = new_salary
         print(f'Salary updated to ${self.salary}.')
 
