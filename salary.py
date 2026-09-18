@@ -5,7 +5,7 @@ class Employee:
         'mid-level': 3000,
         'senior': 4000,
     }
-
+    
     def __init__(self, name, level):
         self.name = name
         self.level = level
