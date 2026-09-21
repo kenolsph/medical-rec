@@ -54,14 +54,23 @@ class MediaCatalogue:
             raise MediaError('Only Movie or TVSeries instances can be added', media_item)
         self.items.append(media_item)
     
-    def get_movies (self):
+    def get_movies(self):
         return [item for item in self.items if type(item) is Movie]
+    
+    def get_tv_series(self):
+        return [item for item in self.items if isinstance(item, TVSeries)]
     
     def __str__(self):
         if not self.items:
             return 'Media Catalogue (empty)'
         
+        movies = self.get_movies()
+        series = self.get_tv_series()
+        
         result = f'Media Catalogue ({len(self.items)} items):\n\n'
+        
+        if movies:
+            result += '=== MOVIES ===\n'
         for i, movie in enumerate(self.items, 1):
             result += f'{i}. {movie}\n'
         
