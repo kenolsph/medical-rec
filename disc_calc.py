@@ -44,7 +44,18 @@ class PremiumUserDiscount(DiscountStrategy):
     def apply_discount(self, product: Product) -> float:
         return product.price * 0.8
 
+class DiscountEngine:
+    def __init__(self, strategies: list[DiscountStrategy]) -> None:
+        self.strategies = strategies
 
+    def calculate_best_price(self, product: Product, user_tier: str) -> float:
+        prices = [product.price]
+
+        for strategy in self.strategies:
+            if strategy.is_applicable(product, user_tier):
+                discounted = strategy.apply_discount(product)
+                prices.append(discounted)
+        
 
 product = Product('Wireless Mouse', 50.0)
 print(product)
