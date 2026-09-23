@@ -55,13 +55,18 @@ class DiscountEngine:
             if strategy.is_applicable(product, user_tier):
                 discounted = strategy.apply_discount(product)
                 prices.append(discounted)
-        
+        return min(prices)
 
-product = Product('Wireless Mouse', 50.0)
-print(product)
+if __name__ == '__main__':
+    product = Product('Wireless Mouse', 50.0)
+    user_tier = 'Premium'
 
-discount = PercentageDiscount(10)
-print(discount.apply_discount(product))
+    strategies = [
+        PercentageDiscount(10),
+        FixedAmountDiscount(5),
+        PremiumUserDiscount()
+    ]
 
-fixed_discount = FixedAmountDiscount(5)
-print(fixed_discount.apply_discount(product))
+    engine = DiscountEngine(strategies)
+    best_price = engine.calculate_best_price(product, user_tier)
+print(f'Best price for {product.name} for {user_tier} user: ${best_price:.2f}')
