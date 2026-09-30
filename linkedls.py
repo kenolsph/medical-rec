@@ -44,3 +44,5 @@ my_list.add(2)
 print(my_list.is_empty())
 print(my_list.length)
 
+my_list.remove(1)
+print(my_list.length)
