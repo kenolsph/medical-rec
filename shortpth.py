@@ -72,3 +72,4 @@ def gen_parentheses(pairs):
     return result
 
 print(gen_parentheses(2))
+print(gen_parentheses(3))
