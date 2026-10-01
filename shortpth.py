@@ -43,4 +43,4 @@ def shortest_path(matrix, start_node, target_node=None):
         path = ' -> '.join(string_path)
         print(f'\n{start_node}-{node_no} distance: {distances[node_no]}\nPath: {path}')
 
-    
+    return distances, paths
